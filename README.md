@@ -1,6 +1,9 @@
 # ig_nlp
 source code to retrieve and process social network information about the IGEPN 
 
+# Configuration file options 
+
+``` bash 
 [RUN_MODE]
 data_source = FACEBOOK | TWITTER 
 output = CSV | MONGODB
@@ -13,3 +16,5 @@ twitter_token_file =   ./config/twitter_token.json
 
 [ACCOUNT_INFO]
 account_name = DGTEST
+
+```

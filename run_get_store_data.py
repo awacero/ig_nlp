@@ -1,5 +1,6 @@
 
 
+import get_facebook_data 
 import nlp_utils
 import sys
 import logging,  logging.config
@@ -26,8 +27,9 @@ def main():
             raise Exception("Error reading configuration sets in file: %s" %str(e))
 
         try:
-            output = run_parameters['RUN_MODE']['output']
             data_source = run_parameters['RUN_MODE']['data_source']
+            output = run_parameters['RUN_MODE']['output']
+            mode = run_parameters['RUN_MODE']['mode']
             account_name = run_parameters['ACCOUNT_INFO']['account_name']
             
             print(output,data_source,account_name)
@@ -42,15 +44,27 @@ def main():
             # get fb token
             # get twt api 
             token_file = run_parameters['TOKEN_FILE']['facebook_token_file']
-            token = nlp_utils.read_json_file(token_file)
-            print(token)
-            pass
+            token_info = nlp_utils.read_json_file(token_file)
+            token = token_info[account_name]['token']
+            fb_api = get_facebook_data.get_facebook_api(token)
+            fields = run_parameters['FACEBOOK']['fields']
+            limit = run_parameters['FACEBOOK']['limit']
+            store_path = run_parameters['STORE']['data_path']
+            if mode == 'SINGLE':
+                facebook_post_id = sys.argv[2]
+                msg = get_facebook_data.download_facebook_messages(facebook_post_id,fb_api,fields,limit)
+                print("SINGLE mode")
+                print(msg)
+                get_facebook_data.store_on_disk(store_path,msg)
+            
         elif data_source == "TWITTER":
             #DO TWT STUFF
             # get twt token
             # get twt api
+            token_file = run_parameters['TOKEN_FILE']['twitter_token_file']
+            token = nlp_utils.read_json_file(token_file)
 
-            pass
 
+    
 
 main()
