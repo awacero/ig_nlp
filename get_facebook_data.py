@@ -63,40 +63,15 @@ def store_on_disk(store_path,messages_dict):
         logging.error("Error creating file: %s" %str(e))
         raise("Error creating file: %s" %str(e)) 
 
-#store_folder="./fbcomments_json/"
-#fb_api=get_facebook_api(token_file_path, fanpage_name)
+
+def store_in_mongodb(mongodb_client):
+
+    try:
+        pass
+
+    except Exception as e:
 
 
-"""
-##STORE MULTIPLE EVENTS IN MONGODB 
-import csv
-
-with open("/home/wacero/BORRAR/evento_id_fb_id.txt",newline='') as csvfile:
-    csv_reader=csv.reader(csvfile,delimiter='|')
-    for row in csv_reader:
-        if row:
-            fb_post_id=row[1]
-            event_id=row[0]
-            print(row[0],row[1])
-            post_messages=download_messages_complete(fb_post_id, fb_api)
-            store_all(store_folder, event_id,post_messages)
-            print(post_messages)
-            store_in_mongo("%s/%s.json" %(store_folder,event_id),fb_post_id,event_id)
-        
-
-"""
-
-"""
-event_id="igepn2019adej"
-fb_post_id="663267810512102_1111325215706357"
-post_messages=download_messages_complete(fb_post_id, fb_api)
-
-store_all(store_folder, event_id,post_messages)
-
-print(post_messages)
-
-store_in_mongo("%s/%s.json" %(store_folder,event_id),fb_post_id,event_id)
-"""
-
+        pass
 
 
